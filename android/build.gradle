@@ -2,14 +2,14 @@ apply plugin: 'com.android.library'
 
 buildscript {
     repositories {
-        maven {  url "file:${System.properties['user.home']}/.m2/repository" }   
+        maven {  url "file:${System.properties['user.home']}/.m2/repository" }
         mavenLocal()
         maven { url "$rootDir/../node_modules/react-native/android" }
         maven { url "$rootDir/../node_modules/jsc-android/dist" }
         google()
         mavenCentral()
         maven { url 'https://jitpack.io' }
-       
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:7.3.1'
@@ -30,18 +30,24 @@ def safeExtGet(prop, fallback) {
 android {
     compileSdkVersion safeExtGet('compileSdkVersion', DEFAULT_COMPILE_SDK_VERSION)
     buildToolsVersion safeExtGet('buildToolsVersion', DEFAULT_BUILD_TOOLS_VERSION)
-    
+
     defaultConfig {
         minSdkVersion safeExtGet('minSdkVersion', DEFAULT_MIN_SDK_VERSION)
         targetSdkVersion safeExtGet('targetSdkVersion', DEFAULT_TARGET_SDK_VERSION)
         versionCode 1
         versionName "1.0"
     }
-    
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
     lintOptions {
         abortOnError false
     }
-    
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -49,24 +55,26 @@ android {
 }
 
 repositories {
-   maven {  url "file:${System.properties['user.home']}/.m2/repository" }   
+   maven {  url "file:${System.properties['user.home']}/.m2/repository" }
    mavenLocal()
    maven { url "$rootDir/../node_modules/react-native/android" }
    maven { url "$rootDir/../node_modules/jsc-android/dist" }
    google()
    mavenCentral()
     maven { url 'https://jitpack.io' }
+    jcenter()
 }
 
 
 
 dependencies {
-    implementation 'com.spotify.android:auth:1.2.3'
+    implementation(name: 'spotify-app-remote-release-0.8.0', ext: 'aar')
+    implementation 'com.spotify.android:auth:2.0.1' // Maven dependency (Preferred)
     implementation 'com.fingoweb:spotify-app-remote:0.7.0'
-    // https://mvnrepository.com/artifact/com.spotify.android/auth  
-    implementation "com.google.code.gson:gson:2.8.5"
-    implementation project(path: ':react-native-events')
-    implementation 'com.facebook.react:react-native:+'
+    // https://mvnrepository.com/artifact/com.spotify.android/auth
+    implementation "com.google.code.gson:gson:2.8.9"
+    implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation "androidx.browser:browser:1.4.0"
 }
 
 // Add publishing configuration if needed
