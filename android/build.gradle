@@ -70,7 +70,6 @@ repositories {
 dependencies {
     implementation(name: 'spotify-app-remote-release-0.8.0', ext: 'aar')
     implementation 'com.spotify.android:auth:2.0.1' // Maven dependency (Preferred)
-    implementation 'com.fingoweb:spotify-app-remote:0.7.0'
     // https://mvnrepository.com/artifact/com.spotify.android/auth
     implementation "com.google.code.gson:gson:2.8.9"
     implementation "com.facebook.react:react-native:+"  // From node_modules
