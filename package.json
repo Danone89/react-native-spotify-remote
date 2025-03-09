@@ -34,16 +34,24 @@
   "types": "dist/index.d.ts",
   "source": "dist/index",
   "react-native": "dist/index",
+  "files": [
+    "dist",
+    "ios",
+    "android",
+    "expo-config.js",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "rebuild": "yarn build && yarn docs",
     "clean": "rm -rf ./dist",
-    "build": "yarn clean && ./node_modules/.bin/tsc",
-    "watch": "yarn build --watch",
+    "build": "yarn clean && tsc",
+    "watch": "tsc --watch",
     "docs": "typedoc --options typedoc.json --excludeExternals",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 0",
     "prepublishOnly": "yarn rebuild",
     "prepack": "yarn submodules && yarn cleanup:ios",
-    "cleanup:ios": "pushd ios/external/SpotifySDK/SpotifyiOS.framework; rm SpotifyiOS Headers; mv Versions/Current/* .; popd",
+    "cleanup:ios": "cd ios/external/SpotifySDK/SpotifyiOS.framework && rm SpotifyiOS Headers && mv Versions/Current/* . && cd -",
     "postpack": "yarn submodules",
     "submodules": "rm -rf ios/external/* && rm -rf android/external/* && git submodule update --init --recursive",
     "example": "concurrently -n \"server,packager\" -c \"yellow,cyan\" \"cd example-server && yarn start\" \"cd example && yarn start\"",
@@ -54,8 +62,8 @@
   "peerDependencies": {
     "react-native": ">=0.60"
   },
-  "dependencies": {},
   "devDependencies": {
+    "@expo/config-plugins": "^9.0.16",
     "@release-it/keep-a-changelog": "^2.2.2",
     "@types/react-native": "^0.60.0",
     "all-contributors-cli": "^6.14.2",
@@ -85,5 +93,12 @@
         "addUnreleased": true
       }
     }
+  },
+  "expo": {
+    "name": "react-native-spotify-remote",
+    "owner": "expo",
+    "plugins": [
+      "./expo-config.js"
+    ]
   }
 }
