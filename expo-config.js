@@ -72,7 +72,7 @@ const withAndroidSpotifyUrlScheme = (config, options = {}) => {
             {
               $: {
                 'android:scheme': `${redirectSchemeName}`,
-                'android:host': 'auth'
+                'android:host': `${redirectHostName}`
               }
             }
           ]
