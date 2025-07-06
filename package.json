@@ -43,6 +43,8 @@
     "LICENSE"
   ],
   "scripts": {
+    "postinstall": "git submodule update --init --recursive",
+    "prepare": "git submodule update --init --recursive",
     "rebuild": "yarn build && yarn docs",
     "clean": "rm -rf ./dist",
     "build": "yarn clean && tsc",
