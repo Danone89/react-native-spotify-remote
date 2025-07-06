@@ -62,7 +62,7 @@
     "contribute": "all-contributors add && all-contributors generate"
   },
   "peerDependencies": {
-    "react-native": ">=0.60"
+    "react-native": "^0.79.5"
   },
   "devDependencies": {
     "@expo/config-plugins": "^9.0.16",
